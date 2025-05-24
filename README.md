@@ -2,6 +2,10 @@
 
 A modern typing speed test application inspired by Monkeytype, built with Next.js and Tailwind CSS.
 
+## Live Demo
+
+You can try it online at: [https://typing-speed-tester-online.netlify.app/](https://typing-speed-tester-online.netlify.app/)
+
 ## Example UI
 
 ![Typing Speed Test Example UI](./public/sc.png)
@@ -45,4 +49,10 @@ A modern typing speed test application inspired by Monkeytype, built with Next.j
 
 ## Deployment
 
-Ongoing...
+Deployed in Netlify
+
+
+
+## License
+
+MIT
