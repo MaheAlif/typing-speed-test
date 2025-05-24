@@ -51,8 +51,3 @@ You can try it online at: [https://typing-speed-tester-online.netlify.app/](http
 
 Deployed in Netlify
 
-
-
-## License
-
-MIT
