@@ -7,14 +7,16 @@
   --background-rgb: 255, 255, 255;
 }
 
-.dark {
+:root.dark {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 17, 24, 39;
 }
 
 body {
-  @apply font-modern bg-gradient-radial min-h-screen;
-  color: #f3f4f6;
+  @apply font-modern min-h-screen;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::-webkit-scrollbar {
@@ -27,7 +29,7 @@ body {
 }
 
 .glass-card {
-  @apply bg-glass shadow-glass rounded-2xl backdrop-blur-md border border-white/10;
+  @apply bg-glass shadow-glass rounded-2xl backdrop-blur-md ;
 }
 
 .neon-btn {
