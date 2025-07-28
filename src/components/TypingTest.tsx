@@ -15,6 +15,7 @@ import {
   Legend,
 } from "chart.js";
 import { useTheme } from "@/context/ThemeContext";
+import { useBackground } from "@/context/BackgroundContext";
 
 ChartJS.register(
   CategoryScale,
@@ -49,6 +50,7 @@ export default function TypingTest({ paragraphs }: TypingTestProps) {
   const [wpmHistory, setWpmHistory] = useState<number[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
+  const { backgroundType } = useBackground();
   console.log(theme);
 
   const resetTest = useCallback(
@@ -212,64 +214,88 @@ export default function TypingTest({ paragraphs }: TypingTestProps) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 flex flex-col items-center">
-      <div className="mb-8 w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div
-          className={`glass-card p-6 flex flex-col items-center border ${
-            theme === "light" ? "border-black" : "border-white/10"
-          }`}
-        >
-          <div className="text-3xl font-extrabold text-accent drop-shadow">
-            {isCompleted ? finalStats?.wpm : stats.wpm}
+      {isCompleted && (
+        <div className="mb-8 w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {/* WPM box */}
+          <div
+            className={`glass-card p-6 flex flex-col items-center border transition-all duration-500 ${
+              backgroundType === "stars"
+                ? "bg-white/10 backdrop-blur-sm border-white/20"
+                : theme === "light" 
+                  ? "border-black" 
+                  : "border-white/10"
+            }`}
+          >
+            <div className="text-3xl font-extrabold text-accent drop-shadow">
+              {finalStats?.wpm}
+            </div>
+            <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
+              WPM
+            </div>
           </div>
-          <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
-            WPM
+          {/* CPM box */}
+          <div
+            className={`glass-card p-6 flex flex-col items-center border transition-all duration-500 ${
+              backgroundType === "stars"
+                ? "bg-white/10 backdrop-blur-sm border-white/20"
+                : theme === "light" 
+                  ? "border-black" 
+                  : "border-white/10"
+            }`}
+          >
+            <div className="text-3xl font-extrabold text-accent drop-shadow">
+              {finalStats?.cpm}
+            </div>
+            <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
+              CPM
+            </div>
+          </div>
+          {/* Accuracy box */}
+          <div
+            className={`glass-card p-6 flex flex-col items-center border transition-all duration-500 ${
+              backgroundType === "stars"
+                ? "bg-white/10 backdrop-blur-sm border-white/20"
+                : theme === "light" 
+                  ? "border-black" 
+                  : "border-white/10"
+            }`}
+          >
+            <div className="text-3xl font-extrabold text-accent drop-shadow">
+              {finalStats?.accuracy}%
+            </div>
+            <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
+              Accuracy
+            </div>
+          </div>
+          {/* Time box */}
+          <div
+            className={`glass-card p-6 flex flex-col items-center border transition-all duration-500 ${
+              backgroundType === "stars"
+                ? "bg-white/10 backdrop-blur-sm border-white/20"
+                : theme === "light" 
+                  ? "border-black" 
+                  : "border-white/10"
+            }`}
+          >
+            <div className="text-3xl font-extrabold text-accent drop-shadow">
+              {finalStats?.timeElapsed}s
+            </div>
+            <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
+              Time
+            </div>
           </div>
         </div>
-        <div
-          className={`glass-card p-6 flex flex-col items-center border ${
-            theme === "light" ? "border-black" : "border-white/10"
-          }`}
-        >
-          <div className="text-3xl font-extrabold text-accent drop-shadow">
-            {isCompleted ? finalStats?.cpm : stats.cpm}
-          </div>
-          <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
-            CPM
-          </div>
-        </div>
-        <div
-          className={`glass-card p-6 flex flex-col items-center border ${
-            theme === "light" ? "border-black" : "border-white/10"
-          }`}
-        >
-          <div className="text-3xl font-extrabold text-accent drop-shadow">
-            {isCompleted ? finalStats?.accuracy : stats.accuracy}%
-          </div>
-          <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
-            Accuracy
-          </div>
-        </div>
-        <div
-          className={`glass-card p-6 flex flex-col items-center border ${
-            theme === "light" ? "border-black" : "border-white/10"
-          }`}
-        >
-          <div className="text-3xl font-extrabold text-accent drop-shadow">
-            {isCompleted ? finalStats?.timeElapsed : stats.timeElapsed}s
-          </div>
-          <div className="text-sm text-neon-blue mt-1 tracking-widest uppercase">
-            Time
-          </div>
-        </div>
-      </div>
+      )}
 
       <div className="mb-8 w-full">
         <div
-          className={`glass-card text-xl leading-relaxed mb-4 min-h-[100px] cursor-text select-none font-mono whitespace-pre-wrap px-6 py-8 transition-all duration-200  ${
-            theme === "light"
-              ? "border border-black"
-              : "border-2 border-white/10"
-          } border-transparent focus-within:border-accent`}
+          className={`glass-card text-xl leading-relaxed mb-4 min-h-[100px] cursor-text select-none font-mono whitespace-pre-wrap px-6 py-8 transition-all duration-500 ${
+            backgroundType === "stars"
+              ? "bg-white/10 backdrop-blur-sm border-2 border-white/20"
+              : theme === "light"
+                ? "border border-black bg-slate-300"
+                : "border-2 border-white/10"
+          } focus-within:border-accent`}
           tabIndex={0}
           onClick={handleParagraphClick}
         >
@@ -290,6 +316,7 @@ export default function TypingTest({ paragraphs }: TypingTestProps) {
               }
             }
             return (
+              // border of individual characters
               <span
                 key={index}
                 className={
@@ -322,7 +349,11 @@ export default function TypingTest({ paragraphs }: TypingTestProps) {
           <h2 className="text-2xl font-bold mb-4 text-center text-accent drop-shadow">
             WPM Over Time
           </h2>
-          <div className="glass-card w-full h-[400px] flex items-center justify-center border-2 border-accent/30">
+          <div className={`glass-card w-full h-[400px] flex items-center justify-center transition-all duration-500 ${
+            backgroundType === "stars"
+              ? "bg-white/10 backdrop-blur-sm border-2 border-white/20"
+              : "border-2 border-accent/30"
+          }`}>
             <div className="w-full h-full">
               <Line data={chartData} options={chartOptions} />
             </div>
@@ -335,18 +366,33 @@ export default function TypingTest({ paragraphs }: TypingTestProps) {
           <>
             <button
               onClick={handleRetake}
-              className="neon-btn px-8 py-3 text-lg"
+              className={`neon-btn px-8 py-3 text-lg transition-all duration-500 ${
+                backgroundType === "stars"
+                  ? "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20"
+                  : ""
+              }`}
             >
               Retake
             </button>
-            <button onClick={handleNext} className="neon-btn px-8 py-3 text-lg">
+            <button 
+              onClick={handleNext} 
+              className={`neon-btn px-8 py-3 text-lg transition-all duration-500 ${
+                backgroundType === "stars"
+                  ? "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20"
+                  : ""
+              }`}
+            >
               Next Paragraph
             </button>
           </>
         ) : (
           <button
             onClick={() => resetTest(false)}
-            className="neon-btn px-8 py-3 text-lg"
+            className={`neon-btn px-8 py-3 text-lg transition-all duration-500 ${
+              backgroundType === "stars"
+                ? "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20"
+                : ""
+            }`}
           >
             Reset Test
           </button>

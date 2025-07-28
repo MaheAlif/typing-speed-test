@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeToggle from "@/components/ThemeToggle";
 import { ThemeProvider } from "@/context/ThemeContext";
+import BackgroundToggle from "@/components/BackgroundToggle";
+import { BackgroundProvider } from "@/context/BackgroundContext";
+import BackgroundStars from "@/components/BackgroundStars";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-modern' });
 
@@ -20,8 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} font-modern min-h-screen`}>
         <ThemeProvider>
-          <ThemeToggle />
-          {children}
+          <BackgroundProvider>
+            <ThemeToggle />
+            <BackgroundToggle />
+            <BackgroundStars />
+            {children}
+          </BackgroundProvider>
         </ThemeProvider>
       </body>
     </html>
