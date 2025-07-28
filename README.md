@@ -12,7 +12,7 @@ You can try it online at: [https://typing-speed-tester-online.netlify.app/](http
 ![Typing Speed Test Example UI](./public/sc.png)
 
 ### Stars Background Theme
-![Typing Speed Test with Stars Background](./myUI.png)
+![Typing Speed Test with Stars Background](./public/myUI.png)
 
 
 ## Features
